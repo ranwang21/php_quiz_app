@@ -1,13 +1,19 @@
 <?php
-// Generate random questions
 
-// Loop for required number of questions
+// read the json file into a variable object
+$questions = json_decode(file_get_contents('./questions.json'), true);
+var_dump($questions); // test
 
-// Get random numbers to add
 
-// Calculate correct answer
+echo "<br />";
+echo "break===========";
+echo "<br />";
 
-// Get incorrect answers within 10 numbers either way of correct answer
-// Make sure it is a unique answer
-
-// Add question and answer to questions array
+/**
+ * Return random question from json
+ * @return a random question
+ */
+function getRandomQuestion(){
+    global $questions;
+    return $questions[random_int(0, count($questions) - 1)];
+}
