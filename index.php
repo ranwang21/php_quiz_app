@@ -14,9 +14,7 @@
             <p class="quiz">What is 54 + 71?</p>
             <form action="generate_questions.php" method="post">
                 <input type="hidden" name="id" value="0" />
-                <input type="submit" class="btn" name="answer" value="135" />
-                <input type="submit" class="btn" name="answer" value="125" />
-                <input type="submit" class="btn" name="answer" value="115" />
+                <?php include 'inc/generate_questions.php'; ?>
             </form>
         </div>
     </div>
