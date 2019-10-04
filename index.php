@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,13 @@
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        score = 10;
+        const correct = () => {
+            alert("Correct!");
+        }
+
+    </script>
 </head>
 <body>
     <div class="container">
@@ -14,7 +25,7 @@
             <p class="quiz">What is 54 + 71?</p>
             <form action="generate_questions.php" method="post">
                 <input type="hidden" name="id" value="0" />
-                <?php include 'inc/generate_questions.php'; ?>
+                <!-- <?php include 'inc/generate_questions.php'; ?> -->
             </form>
         </div>
     </div>

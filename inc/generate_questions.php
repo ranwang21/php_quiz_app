@@ -17,9 +17,9 @@ $questionToShow = getRandomQuestion();
 
 // construct an array of answer button htmls
 $answers = [
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" />',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '" />',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" />'
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" onClick="correct()"/>',
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '" onClick="incorrect()"/>',
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" onClick="incorrect()"/>'
 ];
 
 // store the correct answer in a variable
