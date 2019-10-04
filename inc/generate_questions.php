@@ -1,15 +1,20 @@
 <?php
 
 // read the json file into a variable object
-$questions = json_decode(file_get_contents('./questions.json'), true);
+function getJson() 
+{
+    $questions = json_decode(file_get_contents(__DIR__ . '/questions.json'), true);
+    // var_dump($questions);
+    return $questions;
+}
 
 /**
  * Return random question from json
  * @return array => a random question
  */
 function getRandomQuestion(){
-    global $questions;
-    return $questions[random_int(0, count($questions) - 1)];
+    $questions = getJson();
+    return $questions[array_rand($questions)];
 }
 
 // call the getRandomQuestion and store the question to the variable
@@ -17,9 +22,9 @@ $questionToShow = getRandomQuestion();
 
 // construct an array of answer button htmls
 $answers = [
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" onClick="correct()"/>',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '" onClick="incorrect()"/>',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" onClick="incorrect()"/>'
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" />',
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '" />',
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" />'
 ];
 
 // store the correct answer in a variable
