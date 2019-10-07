@@ -1,13 +1,14 @@
 <?php
 
 // read the json file into a variable object
-$questions = json_decode(file_get_contents('./questions.json'), true);
+$questions = json_decode(file_get_contents(__DIR__ . '/questions.json'), true);
 
 /**
  * Return random question from json
  * @return array => a random question
  */
-function getRandomQuestion(){
+function getRandomQuestion()
+{
     global $questions;
     return $questions[random_int(0, count($questions) - 1)];
 }
@@ -19,7 +20,7 @@ $questionToShow = getRandomQuestion();
 $answers = [
     '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" />',
     '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '" />',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" />'
+    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '" />',
 ];
 
 // store the correct answer in a variable
@@ -29,9 +30,7 @@ $correctAnswer = $questionToShow['correctAnswer'];
 shuffle($answers);
 
 // echo out the html
-for($i = 0; $i < 3; $i++){
+for ($i = 0; $i < 3; $i++) {
     global $answers;
     echo $answers[$i];
 }
-
-?>
