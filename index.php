@@ -24,7 +24,17 @@ function getJson()
 function getRandomQuestion()
 {
     $questions = getJson();
-    return $questions[array_rand($questions)];
+    $step = $_COOKIE['step'];
+    return $questions[$step - 1];
+}
+
+/**
+ * print the current step (question number)
+ */
+function getCurrentStep()
+{
+    echo $step = $_COOKIE['step'];
+
 }
 
 // call the getRandomQuestion and store the question to the variable
@@ -32,9 +42,9 @@ $questionToShow = getRandomQuestion();
 
 // construct an array of answer button htmls
 $answers = [
-    '<input type="submit" class="btn" name="correct" value="' . $questionToShow['correctAnswer'] . '" onclick="correct()"/>',
-    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['firstIncorrectAnswer'] . '"  onClick="incorrect()"/>',
-    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['secondIncorrectAnswer'] . '"  onClick="incorrect()"/>',
+    '<input type="submit" class="btn" name="correct" value="' . $questionToShow['correctAnswer'] . '"/>',
+    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['firstIncorrectAnswer'] . '"/>',
+    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['secondIncorrectAnswer'] . '"/>',
 ];
 
 // randomize the order of the answers before show on html
@@ -42,21 +52,10 @@ shuffle($answers);
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Math Quiz: Addition</title>
-    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <div id="quiz-box">
+<?php include './inc/header.php'?>
 
 
-            <p class="breadcrumbs">Question # of 10</p>
+            <p class="breadcrumbs">Question <?php echo $_COOKIE['step']; ?> of 10</p>
             <!-- get the question's right and left adder -->
             <p class="quiz">What is <?php echo $questionToShow["leftAdder"]; ?> + <?php echo $questionToShow["rightAdder"]; ?></p>
             <form action="check.php" method="POST">
@@ -69,7 +68,5 @@ for ($i = 0; $i < 3; $i++) {
 ?>
 </form>
         </div>
-    </div>
-    <script src="js/main.js"></script>
-</body>
-</html>
+
+<?php include './inc/footer.php'?>

@@ -1,9 +1,16 @@
-console.log("read");
-
-function correct() {
-  alert("correct answer!");
+const correctInput = document.querySelector('[name="correct"]');
+if (correctInput !== null) {
+  correctInput.addEventListener("click", () => {
+    alert("Correct!");
+  });
 }
 
-function incorrect() {
-  alert("incorrect answer!");
+const inputArray = Array.from(document.querySelectorAll('[name="incorrect"]'));
+
+if (inputArray !== null) {
+  inputArray.forEach(input => {
+    input.addEventListener("click", () => {
+      alert("Incorrect!");
+    });
+  });
 }
