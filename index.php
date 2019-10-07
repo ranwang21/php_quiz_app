@@ -1,10 +1,10 @@
 <?php
 
-/**
- * Globals
- */
-$score = 10; // countof scores
-$step = 1; // step number as of n of 10
+// set cookies if not exist
+if(!isset($_COOKIE['step']) && !isset($_COOKIE['score'])){
+    setcookie('step', 1, time()+3600);
+    setcookie('score', 10, time()+3600);
+}
 
 /**
  * read the json file and return the file in an encapsuled array
@@ -33,22 +33,13 @@ $questionToShow = getRandomQuestion();
 
 // construct an array of answer button htmls
 $answers = [
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['correctAnswer'] . '" onClick="{correct()}"/>',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['firstIncorrectAnswer'] . '"  onClick="{incorrect()}"/>',
-    '<input type="submit" class="btn" name="answer" value="' . $questionToShow['secondIncorrectAnswer'] . '"  onClick="{incorrect()}"/>'
+    '<input type="submit" class="btn" name="correct" value="' . $questionToShow['correctAnswer'] . '" onClick="{correct()}"/>',
+    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['firstIncorrectAnswer'] . '"  onClick="{incorrect()}"/>',
+    '<input type="submit" class="btn" name="incorrect" value="' . $questionToShow['secondIncorrectAnswer'] . '"  onClick="{incorrect()}"/>'
 ];
 
-// store the correct answer in a variable
-$correctAnswer = $questionToShow['correctAnswer'];
-
-// randomize the order of the answers
+// randomize the order of the answers before show on html
 shuffle($answers);
-
-// handle submit
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $userAnswer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
-    echo 1;
-}
 
 ?>
 
@@ -73,23 +64,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <body>
     <div class="container">
         <div id="quiz-box">
-            <p class="breadcrumbs">Question <?php echo $step; ?> of 10</p>
+            <p class="breadcrumbs">Question # of 10</p>
             <!-- get the question's right and left adder -->
             <p class="quiz">What is <?php echo $questionToShow["leftAdder"]; ?> + <?php echo $questionToShow["rightAdder"]; ?></p>
-            <form action="index.php" method="post">
+            <form action="check.php" method="POST">
                 <input type="hidden" name="id" value="0" />
                 <!-- loop the answer buttons -->
                 <?php
-                    if($step < 10){
-                        for($i = 0; $i < 3; $i++){
-                            echo $answers[$i];
-                        }
-                        $step++;
-                        echo $step;
-                    } else {
-                        echo "else";
+                    for($i = 0; $i < 3; $i++){
+                        echo $answers[$i];
                     }
-
                 ?>
             </form>
         </div>
