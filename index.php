@@ -64,11 +64,11 @@ shuffle($answers);
                 <input type="hidden" name="id" value="0" />
                 <!-- loop the answer buttons -->
                 <?php
-for ($i = 0; $i < 3; $i++) {
-    echo $answers[$i];
-}
-?>
-</form>
+                    for ($i = 0; $i < 3; $i++) {
+                        echo $answers[$i];
+                    }
+                ?>
+                </form>
         </div>
 
 <?php include './inc/footer.php'?>
