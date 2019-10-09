@@ -24,6 +24,8 @@ function getJson()
 function getRandomQuestion()
 {
     $questions = getJson();
+    // randomlize questions
+    shuffle($questions);
     $step = $_COOKIE['step'];
     return $questions[$step - 1];
 }
